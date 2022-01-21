@@ -49,3 +49,13 @@ class DetailIssueView(TemplateView):
         context = super().get_context_data(**kwargs)
         context['issue'] = get_object_or_404(Issue, pk=kwargs['pk'])
         return context
+
+
+class EditIssueView(TemplateView):
+    template_name = 'edit_issue.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['form'] = IssueModelForm()
+        context['issue'] = get_object_or_404(Issue, pk=kwargs['pk'])
+        return context
