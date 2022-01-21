@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<h1>Issues</h1>
+  <div class="row">
+      <div class="col">
+      <h4>Summary</h4>
+      </div>
+      <div class="col">
+          <h4>Status</h4>
+      </div>
+      <div class="col">
+          <h4>Type</h4>
+      </div>
+        <div class="col">
+          <h4>Updated</h4>
+      </div>
+    </div>
+  {% for issue in issues %}
+  <div class="row">
+  <div class="col">
+    <a href="#"> {{ issue.summary }}</a>
+  </div>
+  <div class="col">
+  {{ issue.status.title }}
+  </div>
+  <div class="col">
+  {{ issue.type.title }}
+  </div>
+  <div class="col">
+      {{ issue.updated_at }}
+  </div>
+</div>
+{% endfor %}
+{% endblock %}
