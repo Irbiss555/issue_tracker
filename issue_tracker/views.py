@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.views.generic import TemplateView
 
 from issue_tracker.forms import IssueModelForm
@@ -21,3 +21,22 @@ class CreateIssueView(TemplateView):
         context = super().get_context_data(**kwargs)
         context['form'] = IssueModelForm()
         return context
+
+    def post(self, request, *args, **kwargs):
+        form = IssueModelForm(request.POST)
+        if form.is_valid():
+            summary = form.cleaned_data['summary']
+            description = form.cleaned_data['description']
+            status = form.cleaned_data['status']
+            type = form.cleaned_data['type']
+            Issue.objects.create(
+                summary=summary,
+                description=description,
+                status=status,
+                type=type
+            )
+            return redirect('index')
+        else:
+            context = super().get_context_data(**kwargs)
+            context['form'] = form
+            return super().render_to_response(context=context)
