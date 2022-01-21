@@ -12,7 +12,7 @@
     <label for="status" class="form-label">{{ form.status.label }}</label>
     <select name="{{ form.status.name }}" class="form-select" aria-label="Default select example">
         {% for choice in form.status.field.queryset %}
-            {% if choice.pk == issue.status %}
+            {% if choice.pk == issue.status.pk %}
                 <option value="{{ choice.pk }}" selected>{{ choice.title }}</option>
             {% else %}
                 <option value="{{ choice.pk }}">{{ choice.title }}</option>
@@ -24,7 +24,7 @@
     <label for="type" class="form-label">{{ form.type.label }}</label>
     <select name="{{ form.type.name }}" class="form-select" aria-label="Default select example">
         {% for choice in form.type.field.queryset %}
-            {% if choice.pk == issue.type %}
+            {% if choice.pk == issue.type.pk %}
                 <option value="{{ choice.pk }}" selected>{{ choice.title }}</option>
             {% else %}
                 <option value="{{ choice.pk }}">{{ choice.title }}</option>
