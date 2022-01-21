@@ -1,0 +1,28 @@
+{% extends 'base.html'%}
+{% load static %}
+
+{% block content %}
+<h1>Issue</h1>
+<h4>Summary</h4>
+<p>{{ issue.summary }}</p>
+<h4>Description</h4>
+<p>{{ issue.description|default_if_none:'' }}</p>
+<h4>Status</h4>
+<p>
+{{ issue.status.title }}
+</p>
+    <h4>Type</h4>
+<p>
+{{ issue.type.title }}
+</p>
+    <h4>Created</h4>
+<p>
+{{ issue.created_at }}
+</p>
+<h4>Updated</h4>
+<p>
+{{ issue.updated_at }}
+</p>
+<a href="{% url 'index' %}" class="btn btn-dark">Back</a>
+<a href="#" class="btn btn-dark">Edit</a>
+{% endblock %}
