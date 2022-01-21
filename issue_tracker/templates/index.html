@@ -20,7 +20,7 @@
   {% for issue in issues %}
   <div class="row">
   <div class="col">
-    <a href="#"> {{ issue.summary }}</a>
+    <a href="{% url 'detail_issue' issue.pk %}"> {{ issue.summary }}</a>
   </div>
   <div class="col">
   {{ issue.status.title }}
