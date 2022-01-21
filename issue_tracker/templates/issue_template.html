@@ -10,5 +10,5 @@
     <p>Created: {{ issue.created_at }}</p>
     <p>Updated: {{ issue.updated_at }}</p>
     <a href="{% url 'index' %}" class="btn btn-primary">Back</a>
-    <a href="#" class="btn btn-primary">Edit</a>
+    <a href="{% url 'edit_issue' issue.pk %}" class="btn btn-primary">Edit</a>
 {% endblock %}
