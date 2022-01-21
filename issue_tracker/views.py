@@ -40,3 +40,12 @@ class CreateIssueView(TemplateView):
             context = super().get_context_data(**kwargs)
             context['form'] = form
             return super().render_to_response(context=context)
+
+
+class DetailIssueView(TemplateView):
+    template_name = 'issue_template.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['issue'] = get_object_or_404(Issue, pk=kwargs['pk'])
+        return context
