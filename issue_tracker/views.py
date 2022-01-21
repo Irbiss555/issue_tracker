@@ -74,3 +74,10 @@ class EditIssueView(TemplateView):
             context['form'] = form
             context['issue'] = issue
             return super().render_to_response(context=context)
+
+
+class DeleteIssueView(TemplateView):
+    def post(self, request, *args, **kwargs):
+        issue = get_object_or_404(Issue, pk=kwargs['pk'])
+        issue.delete()
+        return redirect('index')
