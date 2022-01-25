@@ -7,7 +7,7 @@ class Issue(models.Model):
     summary = models.CharField(max_length=500, verbose_name='Summary')
     description = models.TextField(max_length=2500, null=True, blank=True, verbose_name='Description')
     status = models.ForeignKey('issue_tracker.Status', on_delete=models.CASCADE, verbose_name='Status')
-    type = models.ForeignKey('issue_tracker.Type', on_delete=models.CASCADE, verbose_name='Type')
+    type = models.ManyToManyField('issue_tracker.Type', related_name='issues', verbose_name='Type')
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='Created')
     updated_at = models.DateTimeField(auto_now=True, verbose_name='Updated')
 
