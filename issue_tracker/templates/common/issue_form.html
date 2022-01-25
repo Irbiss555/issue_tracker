@@ -22,9 +22,9 @@
 </div>
 <div class="mb-3">
     <label for="type" class="form-label">{{ form.type.label }}</label>
-    <select name="{{ form.type.name }}" class="form-select" aria-label="Default select example">
+    <select multiple name="{{ form.type.name }}" class="form-select" aria-label="Default select example">
         {% for choice in form.type.field.queryset %}
-            {% if choice.pk == issue.type.pk %}
+            {% if choice in issue.type.all %}
                 <option value="{{ choice.pk }}" selected>{{ choice.title }}</option>
             {% else %}
                 <option value="{{ choice.pk }}">{{ choice.title }}</option>
