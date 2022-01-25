@@ -6,9 +6,14 @@
     <h4>{{ issue.description|default_if_none:'' }}</h4>
     <p></p>
     <p>Status: {{ issue.status.title }}</p>
-    <p>Type: {% for type in issue.type.all %}
-    {{ type.title }},
-    {% endfor %}
+    <p>Type:
+        {% for type in issue.type.all %}
+            {% if type == issue.type.last %}
+                {{ type.title }}
+            {% else %}
+                {{ type.title }},
+            {% endif %}
+        {% endfor %}
     </p>
     <p>Created: {{ issue.created_at }}</p>
     <p>Updated: {{ issue.updated_at }}</p>
