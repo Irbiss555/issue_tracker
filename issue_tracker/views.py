@@ -65,8 +65,8 @@ class EditIssueView(TemplateView):
             issue.summary = form.cleaned_data['summary']
             issue.description = form.cleaned_data['description']
             issue.status = form.cleaned_data['status']
-            issue.type = form.cleaned_data['type']
-            issue.save(update_fields=['summary', 'description', 'status', 'type'])
+            issue.type.set(form.cleaned_data['type'])
+            issue.save(update_fields=['summary', 'description', 'status'])
             return redirect('detail_issue', pk=issue.pk)
         else:
             context = super().get_context_data(**kwargs)
