@@ -26,7 +26,13 @@
   {{ issue.status.title }}
   </div>
   <div class="col">
-  {{ issue.type.title }}
+      {% for type in issue.type.all %}
+          {% if type == issue.type.last %}
+              {{ type.title }}
+          {% else %}
+              {{ type.title }},
+          {% endif %}
+      {% endfor %}
   </div>
   <div class="col">
       {{ issue.updated_at }}
