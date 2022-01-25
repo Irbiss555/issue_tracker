@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404, redirect
+from django.shortcuts import get_object_or_404, redirect
 from django.views.generic import TemplateView
 from issue_tracker.forms import IssueModelForm
 from issue_tracker.models import Issue
@@ -27,13 +27,12 @@ class CreateIssueView(TemplateView):
             summary = form.cleaned_data['summary']
             description = form.cleaned_data['description']
             status = form.cleaned_data['status']
-            type = form.cleaned_data['type']
             issue = Issue.objects.create(
                 summary=summary,
                 description=description,
-                status=status,
-                type=type
+                status=status
             )
+            issue.type.set(form.cleaned_data['type'])
             return redirect('detail_issue', pk=issue.pk)
         else:
             context = super().get_context_data(**kwargs)
