@@ -13,4 +13,4 @@ class IssueAdmin(admin.ModelAdmin):
 
 admin.site.register(Status)
 admin.site.register(Type)
-admin.site.register(Issue, IssueAdmin)
+admin.site.register(Issue)
