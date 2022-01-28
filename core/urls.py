@@ -18,7 +18,7 @@ from django.urls import path
 
 from issue_tracker.views import (
     IndexView, DetailIssueView,
-    EditIssueView, DeleteIssueView, IssueCreateView
+    IssueEditView, DeleteIssueView, IssueCreateView
 )
 
 urlpatterns = [
@@ -26,6 +26,6 @@ urlpatterns = [
     path('', IndexView.as_view(), name='index'),
     path('issue/create/', IssueCreateView.as_view(), name='create_issue'),
     path('issue/<int:pk>', DetailIssueView.as_view(), name='detail_issue'),
-    path('issue/edit/<int:pk>', EditIssueView.as_view(), name='edit_issue'),
+    path('issue/edit/<int:pk>', IssueEditView.as_view(), name='edit_issue'),
     path('issue/delete/<int:pk>', DeleteIssueView.as_view(), name='delete_issue'),
 ]
