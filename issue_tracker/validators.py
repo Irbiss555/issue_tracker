@@ -12,3 +12,15 @@ class MinLengthValidator(BaseValidator):
 
     def clean(self, x):
         return len(x)
+
+
+@deconstructible
+class MaxLengthValidator(BaseValidator):
+    message = 'Value "%(value)s" has length of %(show_value)d! It should be less than %(limit_value)d symbols long!'
+    code = 'too_large'
+
+    def compare(self, a, b):
+        return a > b
+
+    def clean(self, x):
+        return len(x)
