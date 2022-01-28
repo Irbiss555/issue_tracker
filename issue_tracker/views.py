@@ -1,5 +1,6 @@
 from django.shortcuts import get_object_or_404, redirect
-from django.views.generic import TemplateView
+from django.urls import reverse
+from django.views.generic import TemplateView, FormView
 from issue_tracker.forms import IssueModelForm
 from issue_tracker.models import Issue
 
@@ -13,31 +14,25 @@ class IndexView(TemplateView):
         return context
 
 
-class CreateIssueView(TemplateView):
+class IssueCreateView(FormView):
     template_name = 'create_issue.html'
+    form_class = IssueModelForm
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['form'] = IssueModelForm()
-        return context
+    def form_valid(self, form):
+        summary = form.cleaned_data['summary']
+        description = form.cleaned_data['description']
+        status = form.cleaned_data['status']
+        types = form.cleaned_data['type']
+        self.issue = Issue.objects.create(
+            summary=summary,
+            description=description,
+            status=status
+        )
+        self.issue.type.set(types)
+        return super().form_valid(form)
 
-    def post(self, request, *args, **kwargs):
-        form = IssueModelForm(request.POST)
-        if form.is_valid():
-            summary = form.cleaned_data['summary']
-            description = form.cleaned_data['description']
-            status = form.cleaned_data['status']
-            issue = Issue.objects.create(
-                summary=summary,
-                description=description,
-                status=status
-            )
-            issue.type.set(form.cleaned_data['type'])
-            return redirect('detail_issue', pk=issue.pk)
-        else:
-            context = super().get_context_data(**kwargs)
-            context['form'] = form
-            return super().render_to_response(context=context)
+    def get_success_url(self):
+        return reverse('detail_issue', kwargs={'pk': self.issue.pk})
 
 
 class DetailIssueView(TemplateView):
