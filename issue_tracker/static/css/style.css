@@ -1,3 +1,11 @@
+a {
+    text-decoration: none;
+}
+h1 {
+    margin: 50px 0 50px 0;
+    color: #0d6efd;
+}
+
 .pagination {
     text-align: center;
 }
@@ -11,13 +19,12 @@
 }
 
 .pagination a {
-    background: #6a7ddd;
+    background: #0d6efd;
     color: white;
     text-decoration: none;
 }
 
 .pagination a:hover {
-    background: #6a7dff;
     text-decoration: underline;
 }
 
