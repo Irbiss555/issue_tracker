@@ -1,17 +1,14 @@
 from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse
-from django.views.generic import TemplateView, FormView
+from django.views.generic import TemplateView, FormView, ListView
 from issue_tracker.forms import IssueModelForm
 from issue_tracker.models import Issue
 
 
-class IndexView(TemplateView):
+class IndexView(ListView):
     template_name = 'index.html'
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['issues'] = Issue.objects.all()
-        return context
+    context_object_name = 'issues'
+    model = Issue
 
 
 class IssueCreateView(FormView):
