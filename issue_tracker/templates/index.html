@@ -3,39 +3,29 @@
 
 {% block content %}
 <h1>Issues</h1>
-  <div class="row">
-      <div class="col">
-      <h4>Summary</h4>
-      </div>
-      <div class="col">
-          <h4>Status</h4>
-      </div>
-      <div class="col">
-          <h4>Type</h4>
-      </div>
-        <div class="col">
-          <h4>Updated</h4>
-      </div>
-    </div>
-  {% for issue in issues %}
-  <div class="row">
-  <div class="col">
-    <a href="{% url 'detail_issue' issue.pk %}"> {{ issue.summary }}</a>
-  </div>
-  <div class="col">
-  {{ issue.status.title }}
-  </div>
-  <div class="col">
-      {% for type in issue.type.all %}
+
+{% for issue in issues %}
+<div class="card mb-3">
+  <div class="row g-0">
+      <div class="col-md-8">
+          <div class="card-body">
+              <h5 class="card-title"><a href="{% url 'detail_issue' issue.pk %}"> {{ issue.summary }}</a></h5>
+              <p class="card-text"><small class="text-muted">#{{ issue.pk }} Created at {{ issue.created_at }}</small></p>
+              <p class="card-text"><small class="text-muted">{% for type in issue.type.all %}
           {% if type == issue.type.last %}
               {{ type.title }}
           {% else %}
               {{ type.title }},
           {% endif %}
-      {% endfor %}
-  </div>
-  <div class="col">
-      {{ issue.updated_at }}
+      {% endfor %}</small></p>
+          </div>
+      </div>
+      <div class="col-md-4">
+          <div class="card-body">
+              <h5 class="card-title">{{ issue.status.title }}</h5>
+              <p class="card-text"><small class="text-muted">Updated at {{ issue.updated_at }}</small></p>
+          </div>
+      </div>
   </div>
 </div>
 {% endfor %}
