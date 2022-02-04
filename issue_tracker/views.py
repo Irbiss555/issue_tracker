@@ -9,6 +9,7 @@ class IndexView(ListView):
     template_name = 'index.html'
     context_object_name = 'issues'
     model = Issue
+    paginate_by = 10
 
 
 class IssueCreateView(FormView):
