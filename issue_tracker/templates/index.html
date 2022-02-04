@@ -3,7 +3,6 @@
 
 {% block content %}
 <h1>Issues</h1>
-
 {% for issue in issues %}
 <div class="card mb-3">
   <div class="row g-0">
@@ -28,5 +27,8 @@
       </div>
   </div>
 </div>
+{% empty %}
+    <h3>404: {{ 404_error }}</h3>
+    <h3>Issues not found</h3>
 {% endfor %}
 {% endblock %}
