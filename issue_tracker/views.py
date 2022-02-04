@@ -1,7 +1,8 @@
 from urllib.parse import urlencode
 
 from django.db.models import Q
-from django.shortcuts import get_object_or_404, redirect
+from django.http import Http404
+from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse
 from django.views.generic import TemplateView, FormView, ListView
 from issue_tracker.forms import IssueModelForm, SimpleSearchForm
@@ -12,12 +13,22 @@ class IndexView(ListView):
     template_name = 'index.html'
     context_object_name = 'issues'
     model = Issue
-    paginate_by = 10
+    paginate_by = 5
+    allow_empty = False
 
     def get(self, request, *args, **kwargs):
         self.form = self.get_search_form()
         self.search_value = self.get_search_value()
-        return super().get(request, *args, **kwargs)
+        try:
+            return super().get(request, *args, **kwargs)
+        except Http404:
+            context = {
+                '404_error': 'Oops something went wrong!',
+                'form': self.form
+            }
+            if self.search_value:
+                context['query'] = urlencode({'search': self.search_value})
+            return render(request, 'index.html', context=context)
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(object_list=object_list, **kwargs)
