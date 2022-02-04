@@ -4,12 +4,13 @@
   "pk": 1,
   "fields": {
     "summary": "Do homework",
-    "description": "Start doing homework\r\nDeadline: 21.01.2022",
+    "description": "Start doing homework",
     "status": 1,
     "created_at": "2022-01-21T08:08:56.866Z",
-    "updated_at": "2022-01-25T11:40:02.466Z",
+    "updated_at": "2022-01-28T10:08:20.396Z",
     "type": [
-      1
+      1,
+      3
     ]
   }
 },
@@ -84,6 +85,269 @@
     "type": [
       1,
       3
+    ]
+  }
+},
+{
+  "model": "issue_tracker.issue",
+  "pk": 13,
+  "fields": {
+    "summary": "test",
+    "description": "testvtesttest",
+    "status": 2,
+    "created_at": "2022-01-25T12:10:36.142Z",
+    "updated_at": "2022-01-25T12:10:36.142Z",
+    "type": [
+      1,
+      2,
+      3
+    ]
+  }
+},
+{
+  "model": "issue_tracker.issue",
+  "pk": 14,
+  "fields": {
+    "summary": "tdttd",
+    "description": "dcfv",
+    "status": 1,
+    "created_at": "2022-01-28T10:23:05.767Z",
+    "updated_at": "2022-01-28T10:23:05.767Z",
+    "type": [
+      2
+    ]
+  }
+},
+{
+  "model": "issue_tracker.issue",
+  "pk": 15,
+  "fields": {
+    "summary": "sfvvvvvbggs",
+    "description": "sfvdgbgsbdgb",
+    "status": 2,
+    "created_at": "2022-01-28T10:26:42.577Z",
+    "updated_at": "2022-01-28T10:26:42.577Z",
+    "type": [
+      2,
+      3
+    ]
+  }
+},
+{
+  "model": "issue_tracker.issue",
+  "pk": 16,
+  "fields": {
+    "summary": "fvsfvsfv",
+    "description": null,
+    "status": 1,
+    "created_at": "2022-01-28T10:36:12.339Z",
+    "updated_at": "2022-01-28T11:13:58.982Z",
+    "type": [
+      1,
+      2,
+      3
+    ]
+  }
+},
+{
+  "model": "issue_tracker.issue",
+  "pk": 17,
+  "fields": {
+    "summary": "Some issue 1",
+    "description": "Some issue description 1 \r\nSome issue description 1",
+    "status": 3,
+    "created_at": "2022-02-01T08:24:57.109Z",
+    "updated_at": "2022-02-01T08:24:57.109Z",
+    "type": [
+      1
+    ]
+  }
+},
+{
+  "model": "issue_tracker.issue",
+  "pk": 18,
+  "fields": {
+    "summary": "Some issue 2",
+    "description": "Some issue description 2\r\nSome issue description 2\r\nSome issue description 2",
+    "status": 2,
+    "created_at": "2022-02-01T08:25:43.562Z",
+    "updated_at": "2022-02-01T08:25:43.562Z",
+    "type": [
+      2
+    ]
+  }
+},
+{
+  "model": "issue_tracker.issue",
+  "pk": 19,
+  "fields": {
+    "summary": "Some issue 3",
+    "description": "Some issue description 3\r\nSome issue description 3\r\nSome issue description 3\r\nSome issue description 3",
+    "status": 2,
+    "created_at": "2022-02-01T08:26:06.793Z",
+    "updated_at": "2022-02-01T08:26:06.793Z",
+    "type": [
+      3
+    ]
+  }
+},
+{
+  "model": "issue_tracker.issue",
+  "pk": 20,
+  "fields": {
+    "summary": "Some issue 4",
+    "description": "Some issue description 4\r\nSome issue description 4\r\nSome issue description 4",
+    "status": 1,
+    "created_at": "2022-02-01T08:26:48.251Z",
+    "updated_at": "2022-02-01T08:26:48.251Z",
+    "type": [
+      2,
+      3
+    ]
+  }
+},
+{
+  "model": "issue_tracker.issue",
+  "pk": 21,
+  "fields": {
+    "summary": "Some issue 5",
+    "description": "Some issue description 5\r\nSome issue description 5\r\nSome issue description 5",
+    "status": 2,
+    "created_at": "2022-02-01T08:27:28.874Z",
+    "updated_at": "2022-02-01T08:27:28.874Z",
+    "type": [
+      1,
+      2
+    ]
+  }
+},
+{
+  "model": "issue_tracker.issue",
+  "pk": 22,
+  "fields": {
+    "summary": "Some issue 6",
+    "description": "Some issue 6",
+    "status": 1,
+    "created_at": "2022-02-01T12:17:00.066Z",
+    "updated_at": "2022-02-01T12:17:00.067Z",
+    "type": [
+      2
+    ]
+  }
+},
+{
+  "model": "issue_tracker.issue",
+  "pk": 23,
+  "fields": {
+    "summary": "Some issue 7",
+    "description": "Some issue 7",
+    "status": 2,
+    "created_at": "2022-02-01T12:17:17.120Z",
+    "updated_at": "2022-02-01T12:17:17.120Z",
+    "type": [
+      1
+    ]
+  }
+},
+{
+  "model": "issue_tracker.issue",
+  "pk": 24,
+  "fields": {
+    "summary": "Some issue 8",
+    "description": "Some issue 8\r\nSome issue 8\r\nSome issue 8",
+    "status": 2,
+    "created_at": "2022-02-04T05:08:30.430Z",
+    "updated_at": "2022-02-04T05:08:30.430Z",
+    "type": [
+      2,
+      3
+    ]
+  }
+},
+{
+  "model": "issue_tracker.issue",
+  "pk": 25,
+  "fields": {
+    "summary": "Some issue 9",
+    "description": "Some issue 9\r\nSome issue 9\r\nSome issue 9",
+    "status": 3,
+    "created_at": "2022-02-04T05:08:52.031Z",
+    "updated_at": "2022-02-04T05:08:52.031Z",
+    "type": [
+      1
+    ]
+  }
+},
+{
+  "model": "issue_tracker.issue",
+  "pk": 26,
+  "fields": {
+    "summary": "Some issue 10",
+    "description": "Some issue 10\r\nSome issue 10\r\nSome issue 10",
+    "status": 2,
+    "created_at": "2022-02-04T05:09:13.789Z",
+    "updated_at": "2022-02-04T05:09:13.789Z",
+    "type": [
+      1,
+      2
+    ]
+  }
+},
+{
+  "model": "issue_tracker.issue",
+  "pk": 27,
+  "fields": {
+    "summary": "Some issue 11",
+    "description": "Some issue 11\r\nSome issue 11\r\nSome issue 11",
+    "status": 1,
+    "created_at": "2022-02-04T05:09:38.255Z",
+    "updated_at": "2022-02-04T05:09:38.255Z",
+    "type": [
+      1
+    ]
+  }
+},
+{
+  "model": "issue_tracker.issue",
+  "pk": 28,
+  "fields": {
+    "summary": "Some issue 12",
+    "description": "Some issue 12\r\nSome issue 12\r\nSome issue 12",
+    "status": 1,
+    "created_at": "2022-02-04T05:09:55.892Z",
+    "updated_at": "2022-02-04T05:09:55.892Z",
+    "type": [
+      1,
+      2
+    ]
+  }
+},
+{
+  "model": "issue_tracker.issue",
+  "pk": 29,
+  "fields": {
+    "summary": "Some issue 13",
+    "description": "Some issue 13\r\nSome issue 13\r\nSome issue 13",
+    "status": 2,
+    "created_at": "2022-02-04T05:10:32.408Z",
+    "updated_at": "2022-02-04T05:10:32.408Z",
+    "type": [
+      2,
+      3
+    ]
+  }
+},
+{
+  "model": "issue_tracker.issue",
+  "pk": 30,
+  "fields": {
+    "summary": "Some issue 14",
+    "description": "Some issue 14\r\nSome issue 14\r\nSome issue 14",
+    "status": 3,
+    "created_at": "2022-02-04T05:10:46.725Z",
+    "updated_at": "2022-02-04T05:10:46.726Z",
+    "type": [
+      2
     ]
   }
 },
