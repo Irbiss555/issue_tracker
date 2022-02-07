@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 # Register your models here.
-from issue_tracker.models import Status, Type, Issue
+from issue_tracker.models import Status, Type, Issue, Project
 
 
 class IssueAdmin(admin.ModelAdmin):
@@ -11,6 +11,13 @@ class IssueAdmin(admin.ModelAdmin):
     readonly_fields = ['created_at', 'updated_at']
 
 
+class ProjectAdmin(admin.ModelAdmin):
+    list_display = ['title']
+    search_fields = ['title']
+    fields = ['title', 'description', 'start_date', 'end_date']
+
+
 admin.site.register(Status)
 admin.site.register(Type)
 admin.site.register(Issue)
+admin.site.register(Project)
