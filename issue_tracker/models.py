@@ -21,6 +21,7 @@ class Project(models.Model):
 
 
 class Issue(models.Model):
+    project = models.ForeignKey(to='issue_tracker.Project', on_delete=models.CASCADE, verbose_name='Project', null=True)
     summary = models.CharField(max_length=500, verbose_name='Summary', validators=(MaxLengthValidator(20),))
     description = models.TextField(
         max_length=2500,
