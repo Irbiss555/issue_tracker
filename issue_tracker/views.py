@@ -10,7 +10,7 @@ from issue_tracker.models import Issue
 
 
 class IndexView(ListView):
-    template_name = 'index.html'
+    template_name = 'issue/index.html'
     context_object_name = 'issues'
     model = Issue
     paginate_by = 5
@@ -28,7 +28,7 @@ class IndexView(ListView):
             }
             if self.search_value:
                 context['query'] = urlencode({'search': self.search_value})
-            return render(request, 'index.html', context=context)
+            return render(request, 'issue/index.html', context=context)
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(object_list=object_list, **kwargs)
@@ -54,7 +54,7 @@ class IndexView(ListView):
 
 
 class IssueCreateView(FormView):
-    template_name = 'create_issue.html'
+    template_name = 'issue/create_issue.html'
     form_class = IssueModelForm
 
     def form_valid(self, form):
@@ -75,7 +75,7 @@ class IssueCreateView(FormView):
 
 
 class DetailIssueView(TemplateView):
-    template_name = 'issue_template.html'
+    template_name = 'issue/issue_template.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -84,7 +84,7 @@ class DetailIssueView(TemplateView):
 
 
 class IssueEditView(FormView):
-    template_name = 'edit_issue.html'
+    template_name = 'issue/edit_issue.html'
     form_class = IssueModelForm
 
     def dispatch(self, request, *args, **kwargs):
@@ -118,31 +118,6 @@ class IssueEditView(FormView):
     def get_object(self):
         pk = self.kwargs.get('pk')
         return get_object_or_404(Issue, pk=pk)
-
-# class EditIssueView(TemplateView):
-#     template_name = 'edit_issue.html'
-#
-#     def get_context_data(self, **kwargs):
-#         context = super().get_context_data(**kwargs)
-#         context['form'] = IssueModelForm()
-#         context['issue'] = get_object_or_404(Issue, pk=kwargs['pk'])
-#         return context
-#
-#     def post(self, request, *args, **kwargs):
-#         issue = get_object_or_404(Issue, pk=kwargs['pk'])
-#         form = IssueModelForm(request.POST)
-#         if form.is_valid():
-#             issue.summary = form.cleaned_data['summary']
-#             issue.description = form.cleaned_data['description']
-#             issue.status = form.cleaned_data['status']
-#             issue.type.set(form.cleaned_data['type'])
-#             issue.save(update_fields=['summary', 'description', 'status'])
-#             return redirect('detail_issue', pk=issue.pk)
-#         else:
-#             context = super().get_context_data(**kwargs)
-#             context['form'] = form
-#             context['issue'] = issue
-#             return super().render_to_response(context=context)
 
 
 class DeleteIssueView(TemplateView):
