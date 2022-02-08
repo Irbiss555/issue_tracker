@@ -9,6 +9,18 @@
               rows="3">{{ issue.description|default_if_none:'' }}</textarea>
 </div>
 <div class="mb-3">
+    <label for="project" class="form-label">{{ form.project.label }}</label>
+    <select name="{{ form.project.name }}" class="form-select" aria-label="Default select example">
+        {% for choice in form.project.field.queryset %}
+            {% if choice.pk == issue.project.pk %}
+                <option value="{{ choice.pk }}" selected>{{ choice.title }}</option>
+            {% else %}
+                <option value="{{ choice.pk }}">{{ choice.title }}</option>
+            {% endif %}
+        {% endfor %}
+    </select>
+</div>
+<div class="mb-3">
     <label for="status" class="form-label">{{ form.status.label }}</label>
     <select name="{{ form.status.name }}" class="form-select" aria-label="Default select example">
         {% for choice in form.status.field.queryset %}
