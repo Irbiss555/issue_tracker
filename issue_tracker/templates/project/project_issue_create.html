@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<h1>Create issue</h1>
+<form action="{% url 'project_issue_create' project.pk %}" method="post">
+  {% include 'partial/common/project_issue_form.html' with btn_title='Create' %}
+  </form>
+{% endblock %}
+
