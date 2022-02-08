@@ -1,8 +1,9 @@
+from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse
 from django.views.generic import ListView, DetailView, CreateView
 
-from issue_tracker.forms import ProjectModelForm
-from issue_tracker.models import Project
+from issue_tracker.forms import ProjectModelForm, IssueModelForm
+from issue_tracker.models import Project, Issue
 
 
 class ProjectListView(ListView):
@@ -24,3 +25,22 @@ class ProjectCreateView(CreateView):
 
     def get_success_url(self):
         return reverse('project_detail', kwargs={'pk': self.object.pk})
+
+
+class ProjectIssueCreateView(CreateView):
+    template_name = 'project/project_issue_create.html'
+    model = Issue
+    form_class = IssueModelForm
+
+    def form_valid(self, form):
+        project = get_object_or_404(Project, pk=self.kwargs.get('pk'))
+        issue = form.save(commit=False)
+        issue.project = project
+        issue.save()
+        return redirect('project_detail', pk=project.pk)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['project'] = get_object_or_404(Project, pk=self.kwargs['pk'])
+        return context
+
