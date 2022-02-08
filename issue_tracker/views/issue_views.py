@@ -124,4 +124,4 @@ class DeleteIssueView(TemplateView):
     def post(self, request, *args, **kwargs):
         issue = get_object_or_404(Issue, pk=kwargs['pk'])
         issue.delete()
-        return redirect('index')
+        return redirect('issue_list')
