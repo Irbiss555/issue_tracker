@@ -17,14 +17,14 @@ from django.contrib import admin
 from django.urls import path
 
 from issue_tracker.views import (
-    IndexView, DetailIssueView,
+    IssueListView, DetailIssueView,
     IssueEditView, DeleteIssueView, IssueCreateView
 )
 from issue_tracker.views.project_views import ProjectListView
 
 issue_urls = [
     path('admin/', admin.site.urls),
-    path('', IndexView.as_view(), name='index'),
+    path('', IssueListView.as_view(), name='issue_list'),
     path('issue/create/', IssueCreateView.as_view(), name='create_issue'),
     path('issue/<int:pk>', DetailIssueView.as_view(), name='detail_issue'),
     path('issue/edit/<int:pk>', IssueEditView.as_view(), name='edit_issue'),
