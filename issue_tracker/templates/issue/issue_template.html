@@ -4,7 +4,7 @@
 {% block content %}
     <h1>#{{ issue.pk }} {{ issue.summary }}</h1>
     <h4>{{ issue.description|default_if_none:'' }}</h4>
-    <p></p>
+    <p>Project: {{ issue.project.title }}</p>
     <p>Status: {{ issue.status.title }}</p>
     <p>Type:
         {% for type in issue.type.all %}
