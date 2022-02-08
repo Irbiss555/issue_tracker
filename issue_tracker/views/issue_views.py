@@ -9,7 +9,7 @@ from issue_tracker.forms import IssueModelForm, SimpleSearchForm
 from issue_tracker.models import Issue
 
 
-class IndexView(ListView):
+class IssueListView(ListView):
     template_name = 'issue/issue_list.html'
     context_object_name = 'issues'
     model = Issue
