@@ -58,11 +58,13 @@ class IssueCreateView(FormView):
     form_class = IssueModelForm
 
     def form_valid(self, form):
+        project = form.cleaned_data['project']
         summary = form.cleaned_data['summary']
         description = form.cleaned_data['description']
         status = form.cleaned_data['status']
         types = form.cleaned_data['type']
         self.issue = Issue.objects.create(
+            project=project,
             summary=summary,
             description=description,
             status=status
