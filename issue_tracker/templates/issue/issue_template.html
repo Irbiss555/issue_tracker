@@ -20,5 +20,5 @@
     <a href="{% url 'issue_list' %}" class="btn btn-primary">Issue list</a>
     <a href="{% url 'edit_issue' issue.pk %}" class="btn btn-primary">Edit</a>
     <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">Delete</button>
-{% include 'common/delete_modal.html' %}
+{% include 'partial/common/delete_modal.html' %}
 {% endblock %}

@@ -4,7 +4,7 @@
 {% block content %}
 <h1>Edit issue #{{ issue.pk }}</h1>
 <form action="{% url 'edit_issue' issue.pk %}" method="post">
-  {% include 'common/issue_form.html' with btn_title='Edit' %}
+  {% include 'partial/common/issue_form.html' with btn_title='Edit' %}
   </form>
 {% endblock %}
 

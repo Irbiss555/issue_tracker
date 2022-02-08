@@ -4,6 +4,6 @@
 {% block content %}
 <h1>Create project</h1>
 <form action="{% url 'project_create' %}" method="post">
-  {% include 'common/project_form.html' with btn_title='Create' %}
+  {% include 'partial/common/project_form.html' with btn_title='Create' %}
   </form>
 {% endblock %}

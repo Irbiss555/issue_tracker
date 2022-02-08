@@ -4,7 +4,7 @@
 {% block content %}
 <h1>Create issue</h1>
 <form action="{% url 'create_issue' %}" method="post">
-  {% include 'common/issue_form.html' with btn_title='Create' %}
+  {% include 'partial/common/issue_form.html' with btn_title='Create' %}
   </form>
 {% endblock %}
 
