@@ -20,7 +20,7 @@ from issue_tracker.views import (
     IssueListView, DetailIssueView,
     IssueEditView, DeleteIssueView, IssueCreateView
 )
-from issue_tracker.views.project_views import ProjectListView, ProjectView, ProjectCreateView
+from issue_tracker.views.project_views import ProjectListView, ProjectView, ProjectCreateView, ProjectIssueCreateView
 
 issue_urls = [
     path('admin/', admin.site.urls),
@@ -35,6 +35,7 @@ project_urls = [
     path('', ProjectListView.as_view(), name='project_list'),
     path('project/<int:pk>', ProjectView.as_view(), name='project_detail'),
     path('project/create/', ProjectCreateView.as_view(), name='project_create'),
+    path('project/<int:pk>/issue/create/', ProjectIssueCreateView.as_view(), name='project_issue_create'),
 ]
 
 urlpatterns = issue_urls
