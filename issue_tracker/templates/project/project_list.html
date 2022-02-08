@@ -8,7 +8,7 @@
   <div class="row g-0">
       <div class="col-md-8">
           <div class="card-body">
-              <h5 class="card-title"><a href="#"> {{ project.title }}</a></h5>
+              <h5 class="card-title"><a href="{% url 'project_detail' project.pk %}"> {{ project.title }}</a></h5>
           </div>
       </div>
       <div class="col-md-4">
