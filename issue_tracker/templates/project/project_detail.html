@@ -9,7 +9,7 @@
     <a href="{% url 'project_list' %}" class="btn btn-primary">Project list</a>
     <a href="#" class="btn btn-primary">Edit project</a>
     <h1>Issues</h1>
-    {% for issue in project.issue_set.all %}
+    {% for issue in project.issues.all %}
         <div class="card mb-3">
             <div class="row g-0">
                 <div class="col-md-8">
