@@ -1,6 +1,12 @@
 from django import forms
 
-from issue_tracker.models import Issue
+from issue_tracker.models import Issue, Project
+
+
+class ProjectModelForm(forms.ModelForm):
+    class Meta:
+        model = Project
+        fields = ['title', 'description', 'start_date', 'end_date']
 
 
 class IssueModelForm(forms.ModelForm):
