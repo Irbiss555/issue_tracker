@@ -17,7 +17,7 @@
     </p>
     <p>Created: {{ issue.created_at }}</p>
     <p>Updated: {{ issue.updated_at }}</p>
-    <a href="{% url 'index' %}" class="btn btn-primary">Back</a>
+    <a href="{% url 'issue_list' %}" class="btn btn-primary">Issue list</a>
     <a href="{% url 'edit_issue' issue.pk %}" class="btn btn-primary">Edit</a>
     <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">Delete</button>
 {% include 'common/delete_modal.html' %}
