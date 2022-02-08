@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <h1>#{{ project.pk }} {{ project.title }}</h1>
+    <h4>{{ project.description|default_if_none:'' }}</h4>
+    <p>Start date: {{ project.start_date }}</p>
+    <p>End date: {{ project.end_date|default_if_none:'Not set' }}</p>
+    <a href="{% url 'project_list' %}" class="btn btn-primary">Project list</a>
+    <a href="#" class="btn btn-primary">Edit project</a>
+    <h1>Issues</h1>
+    {% for issue in project.issue_set.all %}
+        <div class="card mb-3">
+            <div class="row g-0">
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h5 class="card-title"><a href="{% url 'detail_issue' issue.pk %}"> {{ issue.summary }}</a></h5>
+                        <p class="card-text"><small class="text-muted">#{{ issue.pk }} Created
+                            at {{ issue.created_at }}</small></p>
+                        <p class="card-text"><small class="text-muted">{% for type in issue.type.all %}
+                            {% if type == issue.type.last %}
+                                {{ type.title }}
+                            {% else %}
+                                {{ type.title }},
+                            {% endif %}
+                        {% endfor %}</small></p>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ issue.status.title }}</h5>
+                        <p class="card-text"><small class="text-muted">Updated at {{ issue.updated_at }}</small></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% empty %}
+        <h3>There is no issues</h3>
+    {% endfor %}
+{% endblock %}
