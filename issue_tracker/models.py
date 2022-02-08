@@ -1,7 +1,7 @@
 from django.db import models
 
 # Create your models here.
-from issue_tracker.validators import MinLengthValidator, MaxLengthValidator
+from issue_tracker.validators import MinLengthValidator
 
 
 class Project(models.Model):
@@ -11,7 +11,7 @@ class Project(models.Model):
         null=True,
         blank=True,
         verbose_name='Description',
-        validators=(MinLengthValidator(8),)
+        validators=(MinLengthValidator(3),)
     )
     start_date = models.DateField(verbose_name='Start date')
     end_date = models.DateField(null=True, blank=True, verbose_name='End date')
@@ -28,13 +28,13 @@ class Issue(models.Model):
         verbose_name='Project',
         null=True
     )
-    summary = models.CharField(max_length=500, verbose_name='Summary', validators=(MaxLengthValidator(20),))
+    summary = models.CharField(max_length=500, verbose_name='Summary', validators=(MinLengthValidator(3),))
     description = models.TextField(
         max_length=2500,
         null=True,
         blank=True,
         verbose_name='Description',
-        validators=(MinLengthValidator(10),)
+        validators=(MinLengthValidator(3),)
     )
     status = models.ForeignKey('issue_tracker.Status', on_delete=models.CASCADE, verbose_name='Status')
     type = models.ManyToManyField('issue_tracker.Type', related_name='issues', verbose_name='Type')
