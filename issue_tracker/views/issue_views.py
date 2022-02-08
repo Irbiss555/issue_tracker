@@ -10,7 +10,7 @@ from issue_tracker.models import Issue
 
 
 class IndexView(ListView):
-    template_name = 'issue/index.html'
+    template_name = 'issue/issue_list.html'
     context_object_name = 'issues'
     model = Issue
     paginate_by = 5
@@ -28,7 +28,7 @@ class IndexView(ListView):
             }
             if self.search_value:
                 context['query'] = urlencode({'search': self.search_value})
-            return render(request, 'issue/index.html', context=context)
+            return render(request, 'issue/issue_list.html', context=context)
 
     def get_context_data(self, *, object_list=None, **kwargs):
         context = super().get_context_data(object_list=object_list, **kwargs)
