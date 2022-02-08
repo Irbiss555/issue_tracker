@@ -12,7 +12,7 @@ class ProjectModelForm(forms.ModelForm):
 class IssueModelForm(forms.ModelForm):
     class Meta:
         model = Issue
-        fields = ['summary', 'description', 'status', 'type']
+        fields = ['project', 'summary', 'description', 'status', 'type']
 
 
 class SimpleSearchForm(forms.Form):
