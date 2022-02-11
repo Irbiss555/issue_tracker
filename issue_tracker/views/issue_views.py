@@ -2,7 +2,7 @@ from urllib.parse import urlencode
 
 from django.db.models import Q
 from django.http import Http404
-from django.shortcuts import get_object_or_404, redirect, render
+from django.shortcuts import get_object_or_404, render
 from django.urls import reverse, reverse_lazy
 from django.views.generic import TemplateView, FormView, ListView, DeleteView, UpdateView
 from issue_tracker.forms import IssueModelForm, SimpleSearchForm
@@ -85,41 +85,14 @@ class DetailIssueView(TemplateView):
         return context
 
 
-class IssueEditView(FormView):
+class IssueEditView(UpdateView):
     template_name = 'issue/edit_issue.html'
+    model = Issue
     form_class = IssueModelForm
-
-    def dispatch(self, request, *args, **kwargs):
-        self.issue = self.get_object()
-        return super().dispatch(request, *args, **kwargs)
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['issue'] = self.issue
-        return context
-
-    def get_initial(self):
-        initial = {}
-        for key in 'summary', 'description', 'status':
-            initial[key] = getattr(self.issue, key)
-        initial['type'] = self.issue.type.all()
-        return initial
-
-    def form_valid(self, form):
-        types = form.cleaned_data.pop('type')
-        for key, value in form.cleaned_data.items():
-            if value is not None:
-                setattr(self.issue, key, value)
-        self.issue.save()
-        self.issue.type.set(types)
-        return super().form_valid(form)
+    context_object_name = 'issue'
 
     def get_success_url(self):
-        return reverse('detail_issue', kwargs={'pk': self.issue.pk})
-
-    def get_object(self):
-        pk = self.kwargs.get('pk')
-        return get_object_or_404(Issue, pk=pk)
+        return reverse('detail_issue', kwargs={'pk': self.object.pk})
 
 
 class DeleteIssueView(DeleteView):
