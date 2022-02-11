@@ -1,6 +1,8 @@
 from django.db import models
 
 # Create your models here.
+from django.db.models.deletion import get_candidate_relations_to_delete
+
 from issue_tracker.validators import MinLengthValidator
 
 
@@ -15,6 +17,17 @@ class IsDeletedMixin(models.Model):
 
     def delete(self, using=None, keep_parents=False):
         self.is_deleted = True
+        delete_candidates = get_candidate_relations_to_delete(self.__class__._meta)
+        if delete_candidates:
+            for relation in delete_candidates:
+                if (
+                        relation.on_delete.__name__ == 'CASCADE'
+                        and relation.one_to_many
+                        and not relation.hidden
+                ):
+                    for item in getattr(self, relation.related_name).all():
+                        item.delete()
+
         self.save(update_fields=['is_deleted', ])
 
     class Meta:
