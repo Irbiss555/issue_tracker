@@ -3,8 +3,8 @@ from urllib.parse import urlencode
 from django.db.models import Q
 from django.http import Http404
 from django.shortcuts import get_object_or_404, redirect, render
-from django.urls import reverse
-from django.views.generic import TemplateView, FormView, ListView
+from django.urls import reverse, reverse_lazy
+from django.views.generic import TemplateView, FormView, ListView, DeleteView, UpdateView
 from issue_tracker.forms import IssueModelForm, SimpleSearchForm
 from issue_tracker.models import Issue
 
@@ -122,8 +122,7 @@ class IssueEditView(FormView):
         return get_object_or_404(Issue, pk=pk)
 
 
-class DeleteIssueView(TemplateView):
-    def post(self, request, *args, **kwargs):
-        issue = get_object_or_404(Issue, pk=kwargs['pk'])
-        issue.delete()
-        return redirect('issue_list')
+class DeleteIssueView(DeleteView):
+    template_name = 'issue/issue_list.html'
+    model = Issue
+    success_url = reverse_lazy('issue_list')
