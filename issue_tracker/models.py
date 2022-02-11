@@ -4,8 +4,14 @@ from django.db import models
 from issue_tracker.validators import MinLengthValidator
 
 
+class SoftDeletedManager(models.Manager):
+    def get_queryset(self):
+        return super(SoftDeletedManager, self).get_queryset().filter(is_deleted=False)
+
+
 class IsDeletedMixin(models.Model):
     is_deleted = models.BooleanField(default=False)
+    objects = SoftDeletedManager()
 
     def delete(self, using=None, keep_parents=False):
         self.is_deleted = True
