@@ -1,19 +1,19 @@
 {% csrf_token %}
 <div class="mb-3">
     <label for="title" class="form-label">{{ form.title.label }}</label>
-    <input type="text" class="form-control" id="title" name="{{ form.title.name }}" value="{{ project.title }}">
+    <input type="text" class="form-control" id="title" name="{{ form.title.name }}" value="{{ form.instance.title }}">
 </div>
 <div class="mb-3">
     <label for="description" class="form-label">{{ form.description.label }}</label>
     <textarea name="{{ form.description.name }}" class="form-control" id="description"
-              rows="3">{{ project.description|default_if_none:'' }}</textarea>
+              rows="3">{{ form.instance.description|default_if_none:'' }}</textarea>
 </div>
 <div class="mb-3">
     <label for="start_date" class="form-label">{{ form.start_date.label }}</label>
-    <input type="date" class="form-control" id="start_date" name="{{ form.start_date.name }}" value="{{ project.start_date }}">
+    <input type="date" class="form-control" id="start_date" name="{{ form.start_date.name }}" value="{{ form.instance.start_date|date:'Y-m-d' }}">
 </div>
 <div class="mb-3">
     <label for="end_date" class="form-label">{{ form.end_date.label }}</label>
-    <input type="date" class="form-control" id="end_date" name="{{ form.end_date.name }}" value="{{ project.end_date }}">
+    <input type="date" class="form-control" id="end_date" name="{{ form.end_date.name }}" value="{{ form.instance.end_date|date:'Y-m-d' }}">
 </div>
 <button type="submit" class="btn btn-primary">{{ btn_title }}</button>
