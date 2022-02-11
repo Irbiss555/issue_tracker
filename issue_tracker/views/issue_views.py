@@ -96,6 +96,6 @@ class IssueEditView(UpdateView):
 
 
 class DeleteIssueView(DeleteView):
-    template_name = 'issue/issue_list.html'
+    template_name = 'issue/issue_template.html'
     model = Issue
     success_url = reverse_lazy('issue_list')
