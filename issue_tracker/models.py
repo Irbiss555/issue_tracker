@@ -4,7 +4,14 @@ from django.db import models
 from issue_tracker.validators import MinLengthValidator
 
 
-class Project(models.Model):
+class IsDeletedMixin(models.Model):
+    is_deleted = models.BooleanField(default=False)
+
+    class Meta:
+        abstract = True
+
+
+class Project(IsDeletedMixin):
     title = models.CharField(max_length=100, verbose_name='Title', validators=(MinLengthValidator(3),))
     description = models.TextField(
         max_length=800,
@@ -20,7 +27,7 @@ class Project(models.Model):
         return "{}. {}".format(self.pk, self.title)
 
 
-class Issue(models.Model):
+class Issue(IsDeletedMixin):
     project = models.ForeignKey(
         to='issue_tracker.Project',
         related_name='issues',
@@ -45,14 +52,14 @@ class Issue(models.Model):
         return "{}. {}".format(self.pk, self.summary)
 
 
-class Status(models.Model):
+class Status(IsDeletedMixin):
     title = models.CharField(max_length=50, verbose_name='Title')
 
     def __str__(self):
         return "{}. {}".format(self.pk, self.title)
 
 
-class Type(models.Model):
+class Type(IsDeletedMixin):
     title = models.CharField(max_length=100, verbose_name='Title')
 
     def __str__(self):
