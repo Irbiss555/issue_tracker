@@ -1,6 +1,6 @@
 from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse
-from django.views.generic import ListView, DetailView, CreateView
+from django.views.generic import ListView, DetailView, CreateView, UpdateView
 
 from issue_tracker.forms import ProjectModelForm, IssueModelForm
 from issue_tracker.models import Project, Issue
@@ -44,3 +44,12 @@ class ProjectIssueCreateView(CreateView):
         context['project'] = get_object_or_404(Project, pk=self.kwargs['pk'])
         return context
 
+
+class ProjectEditView(UpdateView):
+    template_name = 'project/project_edit.html'
+    model = Project
+    form_class = ProjectModelForm
+    context_object_name = 'project'
+
+    def get_success_url(self):
+        return reverse('project_detail', kwargs={'pk': self.object.pk})
