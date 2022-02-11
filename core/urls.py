@@ -22,7 +22,7 @@ from issue_tracker.views import (
 )
 from issue_tracker.views.project_views import (
     ProjectListView, ProjectView, ProjectCreateView,
-    ProjectIssueCreateView, ProjectEditView)
+    ProjectIssueCreateView, ProjectEditView, ProjectDeleteView)
 
 issue_urls = [
     path('admin/', admin.site.urls),
@@ -38,6 +38,7 @@ project_urls = [
     path('project/<int:pk>', ProjectView.as_view(), name='project_detail'),
     path('project/create/', ProjectCreateView.as_view(), name='project_create'),
     path('project/<int:pk>/edit/', ProjectEditView.as_view(), name='project_edit'),
+    path('project/<int:pk>/delete/', ProjectDeleteView.as_view(), name='project_delete'),
     path('project/<int:pk>/issue/create/', ProjectIssueCreateView.as_view(), name='project_issue_create'),
 ]
 
