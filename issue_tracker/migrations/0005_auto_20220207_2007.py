@@ -6,7 +6,7 @@ from django.db import migrations
 def transfer_projects(apps, schema_editor):
     Issue = apps.get_model('issue_tracker.Issue')
     Project = apps.get_model('issue_tracker.Project')
-    project = Project.objects.get(pk=1)
+    project = Project.objects.create(title='my project', description='me own project', start_date='2021-01-01')
     for issue in Issue.objects.all():
         issue.project = project
         issue.save()
