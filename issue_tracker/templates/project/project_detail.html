@@ -7,10 +7,12 @@
     <p>Start date: {{ project.start_date }}</p>
     <p>End date: {{ project.end_date|default_if_none:'Not set' }}</p>
     <a href="{% url 'project_list' %}" class="btn btn-primary">Project list</a>
-    <a href="{% url 'project_issue_create' project.pk %}" class="btn btn-primary">Create project issue</a>
-    <a href="{% url 'project_edit' project.pk %}" class="btn btn-primary">Edit project</a>
-    <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">Delete</button>
-{% include 'partial/common/delete_project_modal.html' %}
+    {% if request.user.authenticated %}
+        <a href="{% url 'project_issue_create' project.pk %}" class="btn btn-primary">Create project issue</a>
+        <a href="{% url 'project_edit' project.pk %}" class="btn btn-primary">Edit project</a>
+        <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">Delete</button>
+        {% include 'partial/common/delete_project_modal.html' %}
+    {% endif %}
     <h1>Issues</h1>
     {% for issue in project.issues.all %}
         <div class="card mb-3">
