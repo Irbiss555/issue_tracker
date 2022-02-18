@@ -11,16 +11,16 @@ h1 {
 
 .pagination a, .pagination .page-disabled {
     display: inline-block;
-    border: solid 1px #6a7ddd;
+    border: solid 1px;
     border-radius: 3px;
     padding: 5px;
     margin: 3px;
 }
 
 .pagination a {
-    background: #0d6efd;
-    color: white;
-    text-decoration: none;
+    color: #fff;
+    background-color: #212529;
+    border-color: #212529;
 }
 
 .pagination a:hover {
@@ -28,8 +28,9 @@ h1 {
 }
 
 .pagination .page-disabled {
-    background: #6a7dcc;
-    color: #dddddd
+    color: #fff;
+    background-color: #9B9D9E;
+    border-color: #9B9D9E;
 }
 
 .pagination .current-page {
