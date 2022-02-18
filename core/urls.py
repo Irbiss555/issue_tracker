@@ -24,8 +24,15 @@ from issue_tracker.views.project_views import (
     ProjectListView, ProjectView, ProjectCreateView,
     ProjectIssueCreateView, ProjectEditView, ProjectDeleteView)
 
+from django.contrib.auth.views import LoginView, LogoutView
+
+
+accounts_urls = [
+    path('accounts/login/', LoginView.as_view(), name='login'),
+    path('accounts/logout/', LogoutView.as_view(), name='logout'),
+]
+
 issue_urls = [
-    path('admin/', admin.site.urls),
     path('issues/', IssueListView.as_view(), name='issue_list'),
     path('issue/create/', IssueCreateView.as_view(), name='create_issue'),
     path('issue/<int:pk>', DetailIssueView.as_view(), name='detail_issue'),
@@ -42,5 +49,10 @@ project_urls = [
     path('project/<int:pk>/issue/create/', ProjectIssueCreateView.as_view(), name='project_issue_create'),
 ]
 
-urlpatterns = issue_urls
-urlpatterns += project_urls
+urlpatterns = [
+    path('admin/', admin.site.urls),
+]
+
+urlpatterns.extend(accounts_urls)
+urlpatterns.extend(issue_urls)
+urlpatterns.extend(project_urls)
