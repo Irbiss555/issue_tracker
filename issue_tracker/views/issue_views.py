@@ -5,6 +5,8 @@ from django.http import Http404
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse, reverse_lazy
 from django.views.generic import TemplateView, FormView, ListView, DeleteView, UpdateView
+from django.contrib.auth.mixins import LoginRequiredMixin
+
 from issue_tracker.forms import IssueModelForm, SimpleSearchForm
 from issue_tracker.models import Issue
 
@@ -53,7 +55,7 @@ class IssueListView(ListView):
         return None
 
 
-class IssueCreateView(FormView):
+class IssueCreateView(LoginRequiredMixin, FormView):
     template_name = 'issue/create_issue.html'
     form_class = IssueModelForm
 
@@ -85,7 +87,7 @@ class DetailIssueView(TemplateView):
         return context
 
 
-class IssueEditView(UpdateView):
+class IssueEditView(LoginRequiredMixin, UpdateView):
     template_name = 'issue/edit_issue.html'
     model = Issue
     form_class = IssueModelForm
@@ -95,7 +97,7 @@ class IssueEditView(UpdateView):
         return reverse('detail_issue', kwargs={'pk': self.object.pk})
 
 
-class DeleteIssueView(DeleteView):
+class DeleteIssueView(LoginRequiredMixin, DeleteView):
     template_name = 'issue/issue_template.html'
     model = Issue
     success_url = reverse_lazy('issue_list')
