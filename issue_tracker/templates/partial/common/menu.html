@@ -9,23 +9,23 @@
             <li class="nav-item">
                 <a class="nav-link" aria-current="page" href="{% url 'issue_list' %}">Issues</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" aria-current="page" href="{% url 'project_create' %}">Create project</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" aria-current="page" href="{% url 'create_issue' %}">Create issue</a>
-            </li>
             {% if request.user.is_authenticated %}
+                <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="{% url 'project_create' %}">Create project</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="{% url 'create_issue' %}">Create issue</a>
+                </li>
                 <li class="nav-item nav-link">
-                Привет, {{ user.username }}!
-            </li>
-                 <li class="nav-item">
-                <a class="nav-link" aria-current="page" href="{% url 'logout' %}">Sign out</a>
-            </li>
-                {% else %}
-            <li class="nav-item">
-                <a class="nav-link" aria-current="page" href="{% url 'login' %}">Sign in</a>
-            </li>
+                    Привет, {{ user.username }}!
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="{% url 'logout' %}">Sign out</a>
+                </li>
+            {% else %}
+                <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="{% url 'login' %}">Sign in</a>
+                </li>
             {% endif %}
         </ul>
         <form class="d-flex" action="{% url 'issue_list' %}" method="GET">
