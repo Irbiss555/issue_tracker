@@ -9,7 +9,7 @@
         Are you sure to remove issue #{{ issue.pk }}?
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Close</button>
         <form action="{% url 'delete_issue' issue.pk %}" method="POST">
           {% csrf_token %}
           <button type="submit" class="btn btn-danger">Delete</button>
