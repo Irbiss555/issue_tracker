@@ -29,7 +29,7 @@
             {% endif %}
         </ul>
         <form class="d-flex" action="{% url 'issue_list' %}" method="GET">
-            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="{{ form.search.name }}" value="{{ form.search.value|default_if_none:'' }}">
+            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="{{ search_form.search.name }}" value="{{ search_form.search.value|default_if_none:'' }}">
             <button class="btn btn-dark" type="submit">Search</button>
         </form>
       </div>
