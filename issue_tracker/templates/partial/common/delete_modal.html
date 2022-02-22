@@ -10,7 +10,7 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Close</button>
-        <form action="{% url 'delete_issue' issue.pk %}" method="POST">
+        <form action="{% url 'issue_tracker:delete_issue' issue.pk %}" method="POST">
           {% csrf_token %}
           <button type="submit" class="btn btn-danger">Delete</button>
         </form>
