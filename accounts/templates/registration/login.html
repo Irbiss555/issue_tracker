@@ -16,7 +16,7 @@
             <label for="password" class="form-label">Password:</label>
             <input class="form-control" type="password" name="password" id="password">
         </div>
-        <button type="submit" class="btn btn-dark">Sign in</button>
-        <a href="{% url 'accounts:create' %}?next={{ request.get_full_path }}">Sign up</a>
+        <button type="submit" class="btn btn-dark">Sign in</button><span>  or  </span>
+        <a href="{% url 'accounts:create' %}">Sign up</a>
     </form>
 {% endblock %}
