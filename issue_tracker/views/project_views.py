@@ -25,7 +25,7 @@ class ProjectCreateView(LoginRequiredMixin, CreateView):
     form_class = ProjectModelForm
 
     def get_success_url(self):
-        return reverse('project_detail', kwargs={'pk': self.object.pk})
+        return reverse('issue_tracker:project_detail', kwargs={'pk': self.object.pk})
 
 
 class ProjectIssueCreateView(LoginRequiredMixin, CreateView):
@@ -38,7 +38,7 @@ class ProjectIssueCreateView(LoginRequiredMixin, CreateView):
         issue = form.save(commit=False)
         issue.project = project
         issue.save()
-        return redirect('project_detail', pk=project.pk)
+        return redirect('issue_tracker:project_detail', pk=project.pk)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -53,11 +53,11 @@ class ProjectEditView(LoginRequiredMixin, UpdateView):
     context_object_name = 'project'
 
     def get_success_url(self):
-        return reverse('project_detail', kwargs={'pk': self.object.pk})
+        return reverse('issue_tracker:project_detail', kwargs={'pk': self.object.pk})
 
 
 class ProjectDeleteView(LoginRequiredMixin, DeleteView):
     template_name = 'project/project_detail.html'
     model = Project
-    success_url = reverse_lazy('project_list')
+    success_url = reverse_lazy('issue_tracker:project_list')
     context_object_name = ''

@@ -75,7 +75,7 @@ class IssueCreateView(LoginRequiredMixin, FormView):
         return super().form_valid(form)
 
     def get_success_url(self):
-        return reverse('detail_issue', kwargs={'pk': self.issue.pk})
+        return reverse('issue_tracker:detail_issue', kwargs={'pk': self.issue.pk})
 
 
 class DetailIssueView(TemplateView):
@@ -94,10 +94,10 @@ class IssueEditView(LoginRequiredMixin, UpdateView):
     context_object_name = 'issue'
 
     def get_success_url(self):
-        return reverse('detail_issue', kwargs={'pk': self.object.pk})
+        return reverse('issue_tracker:detail_issue', kwargs={'pk': self.object.pk})
 
 
 class DeleteIssueView(LoginRequiredMixin, DeleteView):
     template_name = 'issue/issue_template.html'
     model = Issue
-    success_url = reverse_lazy('issue_list')
+    success_url = reverse_lazy('issue_tracker:issue_list')
