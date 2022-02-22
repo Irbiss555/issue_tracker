@@ -45,3 +45,8 @@ h1 {
     text-align: center;
     border: solid 1px gray;
 }
+
+.account-form > .mb-3 {
+    width: 60%;
+    margin: auto;
+}
