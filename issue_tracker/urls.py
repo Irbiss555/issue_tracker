@@ -8,6 +8,7 @@ from issue_tracker.views.project_views import (
     ProjectListView, ProjectView, ProjectCreateView,
     ProjectIssueCreateView, ProjectEditView, ProjectDeleteView)
 
+app_name = 'issue_tracker'
 
 issue_urls = [
     path('issues/', IssueListView.as_view(), name='issue_list'),
