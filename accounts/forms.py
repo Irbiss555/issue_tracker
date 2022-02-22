@@ -15,6 +15,7 @@ class MyUserCreationForm(forms.ModelForm):
         strip=False,
         required=True,
     )
+    email = forms.EmailField(required=True, label='Email', widget=forms.EmailInput)
 
     def clean(self):
         cleaned_data = super().clean()
