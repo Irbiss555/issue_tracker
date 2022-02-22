@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <h1 style="text-align: center">Sign up</h1>
+    <form action="{% url 'accounts:create' %}" method="post" class="text-center account-form">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="username" class="form-label">Username:</label>
+            <input class="form-control" type="text" name="{{ form.username.name }}" id="username" value="{{ form.instance.username }}">
+        </div>
+        <div class="mb-3">
+            <label for="first_name" class="form-label">First name:</label>
+            <input class="form-control" type="text" name="{{ form.first_name.name }}" id="first_name" value="{{ form.instance.first_name }}">
+        </div>
+        <div class="mb-3">
+            <label for="last_name" class="form-label">Last name:</label>
+            <input class="form-control" type="text" name="{{ form.last_name.name }}" id="last_name" value="{{ form.instance.last_name }}">
+        </div>
+        <div class="mb-3">
+            <label for="password" class="form-label">Password:</label>
+            <input class="form-control" type="password" name="{{ form.password.name }}" id="password">
+        </div>
+        <div class="mb-3">
+            <label for="password_confirm" class="form-label">Password confirm:</label>
+            <input class="form-control" type="password" name="{{ form.password_confirm.name }}" id="password_confirm">
+        </div>
+        <div class="mb-3">
+            <label for="email" class="form-label">Email:</label>
+            <input class="form-control" type="email" name="{{ form.email.name }}" id="email" value="{{ form.instance.email }}">
+        </div>
+        <button type="submit" class="btn btn-dark">Sign up</button>
+    </form>
+{% endblock %}
