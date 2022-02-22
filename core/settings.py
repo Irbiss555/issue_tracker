@@ -132,5 +132,5 @@ STATICFILES_DIRS = [
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-LOGIN_REDIRECT_URL = 'project_list'
-LOGOUT_REDIRECT_URL = 'project_list'
+LOGIN_REDIRECT_URL = 'issue_tracker:project_list'
+LOGOUT_REDIRECT_URL = 'issue_tracker:project_list'
