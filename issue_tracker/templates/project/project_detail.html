@@ -6,6 +6,17 @@
     <h4>{{ project.description|default_if_none:'' }}</h4>
     <p>Start date: {{ project.start_date }}</p>
     <p>End date: {{ project.end_date|default_if_none:'Not set' }}</p>
+    <p>Users:
+        {% for user in project.users.all %}
+            {% if user == project.users.last %}
+                {{ user.get_full_name }}
+            {% else %}
+                {{ user.get_full_name }},
+            {% endif %}
+        {% empty %}
+            No users
+        {% endfor %}
+    </p>
     <a href="{% url 'issue_tracker:project_list' %}" class="btn btn-dark">Project list</a>
     {% if request.user.is_authenticated %}
         <a href="{% url 'issue_tracker:project_issue_create' project.pk %}" class="btn btn-dark">Create project issue</a>
