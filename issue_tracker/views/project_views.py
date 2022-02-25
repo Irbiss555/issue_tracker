@@ -42,7 +42,10 @@ class ProjectUsersUpdateView(PermissionRequiredMixin, UpdateView):
     permission_required = 'issue_tracker.change_project_users'
 
     def has_permission(self):
-        return super().has_permission() and (self.request.user in self.get_object().users.all())
+        return (
+                (super().has_permission() and (self.request.user in self.get_object().users.all())) or
+                self.request.user.is_superuser
+        )
 
     def get_success_url(self):
         return reverse('issue_tracker:project_detail', kwargs={'pk': self.object.pk})
@@ -56,7 +59,10 @@ class ProjectIssueCreateView(PermissionRequiredMixin, CreateView):
 
     def has_permission(self):
         project = get_object_or_404(Project, pk=self.kwargs.get('pk'))
-        return super().has_permission() and (self.request.user in project.users.all())
+        return (
+                (super().has_permission() and (self.request.user in project.users.all())) or
+                self.request.user.is_superuser
+        )
 
     def form_valid(self, form):
         project = get_object_or_404(Project, pk=self.kwargs.get('pk'))
