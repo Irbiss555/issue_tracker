@@ -18,14 +18,14 @@
         {% endfor %}
     </p>
     <a href="{% url 'issue_tracker:project_list' %}" class="btn btn-dark">Project list</a>
-    {% if perms.issue_tracker.add_issue and request.user in project.users.all %}
+    {% if perms.issue_tracker.add_issue and request.user in project.users.all or request.user.is_superuser %}
         <a href="{% url 'issue_tracker:project_issue_create' project.pk %}" class="btn btn-dark">Create project
             issue</a>
     {% endif %}
     {% if perms.issue_tracker.change_project %}
         <a href="{% url 'issue_tracker:project_edit' project.pk %}" class="btn btn-dark">Edit project</a>
     {% endif %}
-    {% if perms.issue_tracker.change_project_users and request.user in project.users.all %}
+    {% if perms.issue_tracker.change_project_users and request.user in project.users.all or request.user.is_superuser %}
         <a href="{% url 'issue_tracker:project_users_update' project.pk %}" class="btn btn-dark">Manage users</a>
     {% endif %}
     {% if perms.issue_tracker.delete_project %}
