@@ -1,7 +1,7 @@
 from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse, reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
-from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
+from django.contrib.auth.mixins import PermissionRequiredMixin
 
 from issue_tracker.forms import ProjectModelForm, IssueModelForm, ProjectUsersModelForm
 from issue_tracker.models import Project, Issue
@@ -41,14 +41,22 @@ class ProjectUsersUpdateView(PermissionRequiredMixin, UpdateView):
     context_object_name = 'project'
     permission_required = 'issue_tracker.change_project_users'
 
+    def has_permission(self):
+        return super().has_permission() and (self.request.user in self.get_object().users.all())
+
     def get_success_url(self):
         return reverse('issue_tracker:project_detail', kwargs={'pk': self.object.pk})
 
 
-class ProjectIssueCreateView(LoginRequiredMixin, CreateView):
+class ProjectIssueCreateView(PermissionRequiredMixin, CreateView):
     template_name = 'project/project_issue_create.html'
     model = Issue
     form_class = IssueModelForm
+    permission_required = 'issue_tracker.add_issue'
+
+    def has_permission(self):
+        project = get_object_or_404(Project, pk=self.kwargs.get('pk'))
+        return super().has_permission() and (self.request.user in project.users.all())
 
     def form_valid(self, form):
         project = get_object_or_404(Project, pk=self.kwargs.get('pk'))
