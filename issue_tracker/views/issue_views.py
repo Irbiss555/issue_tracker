@@ -5,7 +5,7 @@ from django.http import Http404
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse, reverse_lazy
 from django.views.generic import TemplateView, FormView, ListView, DeleteView, UpdateView
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 
 from issue_tracker.forms import IssueModelForm, SimpleSearchForm
 from issue_tracker.models import Issue
@@ -55,9 +55,10 @@ class IssueListView(ListView):
         return None
 
 
-class IssueCreateView(LoginRequiredMixin, FormView):
+class IssueCreateView(PermissionRequiredMixin, FormView):
     template_name = 'issue/create_issue.html'
     form_class = IssueModelForm
+    permission_required = 'issue_tracker.add_issue'
 
     def form_valid(self, form):
         project = form.cleaned_data['project']
@@ -87,11 +88,17 @@ class DetailIssueView(TemplateView):
         return context
 
 
-class IssueEditView(LoginRequiredMixin, UpdateView):
+class IssueEditView(PermissionRequiredMixin, UpdateView):
     template_name = 'issue/edit_issue.html'
     model = Issue
     form_class = IssueModelForm
     context_object_name = 'issue'
+    permission_required = 'issue_tracker.change_issue'
+
+    def has_permission(self):
+        issue = get_object_or_404(Issue, pk=self.kwargs.get('pk'))
+        project = issue.project
+        return super().has_permission() and (self.request.user in project.users.all())
 
     def get_success_url(self):
         return reverse('issue_tracker:detail_issue', kwargs={'pk': self.object.pk})
