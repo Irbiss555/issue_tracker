@@ -3,9 +3,9 @@ from urllib.parse import urlencode
 from django.db.models import Q
 from django.http import Http404
 from django.shortcuts import get_object_or_404, render
-from django.urls import reverse, reverse_lazy
-from django.views.generic import TemplateView, FormView, ListView, DeleteView, UpdateView
-from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
+from django.urls import reverse
+from django.views.generic import TemplateView, ListView, DeleteView, UpdateView, CreateView
+from django.contrib.auth.mixins import PermissionRequiredMixin
 
 from issue_tracker.forms import IssueModelForm, SimpleSearchForm
 from issue_tracker.models import Issue
@@ -55,28 +55,16 @@ class IssueListView(ListView):
         return None
 
 
-class IssueCreateView(PermissionRequiredMixin, FormView):
+class IssueCreateView(PermissionRequiredMixin, CreateView):
     template_name = 'issue/create_issue.html'
     form_class = IssueModelForm
     permission_required = 'issue_tracker.add_issue'
 
-    def form_valid(self, form):
-        project = form.cleaned_data['project']
-        summary = form.cleaned_data['summary']
-        description = form.cleaned_data['description']
-        status = form.cleaned_data['status']
-        types = form.cleaned_data['type']
-        self.issue = Issue.objects.create(
-            project=project,
-            summary=summary,
-            description=description,
-            status=status
-        )
-        self.issue.type.set(types)
-        return super().form_valid(form)
+    def has_permission(self):
+        return self.request.user.is_superuser
 
     def get_success_url(self):
-        return reverse('issue_tracker:detail_issue', kwargs={'pk': self.issue.pk})
+        return reverse('issue_tracker:detail_issue', kwargs={'pk': self.object.pk})
 
 
 class DetailIssueView(TemplateView):
@@ -98,7 +86,10 @@ class IssueEditView(PermissionRequiredMixin, UpdateView):
     def has_permission(self):
         issue = get_object_or_404(Issue, pk=self.kwargs.get('pk'))
         project = issue.project
-        return super().has_permission() and (self.request.user in project.users.all())
+        return (
+                (super().has_permission() and (self.request.user in project.users.all())) or
+                self.request.user.is_superuser
+        )
 
     def get_success_url(self):
         return reverse('issue_tracker:detail_issue', kwargs={'pk': self.object.pk})
@@ -112,7 +103,10 @@ class DeleteIssueView(PermissionRequiredMixin, DeleteView):
     def has_permission(self):
         issue = get_object_or_404(Issue, pk=self.kwargs.get('pk'))
         project = issue.project
-        return super().has_permission() and (self.request.user in project.users.all())
+        return (
+                (super().has_permission() and (self.request.user in project.users.all())) or
+                self.request.user.is_superuser
+        )
 
     def get_success_url(self):
         return reverse('issue_tracker:project_detail', kwargs={'pk': self.object.project.pk})
