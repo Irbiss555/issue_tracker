@@ -21,6 +21,7 @@
     {% if request.user.is_authenticated %}
         <a href="{% url 'issue_tracker:project_issue_create' project.pk %}" class="btn btn-dark">Create project issue</a>
         <a href="{% url 'issue_tracker:project_edit' project.pk %}" class="btn btn-dark">Edit project</a>
+        <a href="{% url 'issue_tracker:project_users_update' project.pk %}" class="btn btn-dark">Manage users</a>
         <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">Delete</button>
         {% include 'partial/common/delete_project_modal.html' %}
     {% endif %}
