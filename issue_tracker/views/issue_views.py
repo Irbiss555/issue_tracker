@@ -104,7 +104,15 @@ class IssueEditView(PermissionRequiredMixin, UpdateView):
         return reverse('issue_tracker:detail_issue', kwargs={'pk': self.object.pk})
 
 
-class DeleteIssueView(LoginRequiredMixin, DeleteView):
+class DeleteIssueView(PermissionRequiredMixin, DeleteView):
     template_name = 'issue/issue_template.html'
     model = Issue
-    success_url = reverse_lazy('issue_tracker:issue_list')
+    permission_required = 'issue_tracker.delete_issue'
+
+    def has_permission(self):
+        issue = get_object_or_404(Issue, pk=self.kwargs.get('pk'))
+        project = issue.project
+        return super().has_permission() and (self.request.user in project.users.all())
+
+    def get_success_url(self):
+        return reverse('issue_tracker:project_detail', kwargs={'pk': self.object.project.pk})
