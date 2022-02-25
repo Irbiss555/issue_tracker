@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <h1>Edit projest #{{ project.pk }}</h1>
+    <form action="{% url 'issue_tracker:project_users_update' project.pk %}" method="post">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="type" class="form-label">{{ form.users.label }}</label>
+            <select multiple name="{{ form.users.name }}" class="form-select" aria-label="Default select example">
+                {% for choice in form.users.field.queryset %}
+                    {% if choice in project.users.all %}
+                        <option value="{{ choice.pk }}" selected>{{ choice.get_full_name }}</option>
+                    {% else %}
+                        <option value="{{ choice.pk }}">{{ choice.get_full_name }}</option>
+                    {% endif %}
+                {% endfor %}
+            </select>
+        </div>
+        <button type="submit" class="btn btn-dark">Save</button>
+    </form>
+{% endblock %}
