@@ -3,7 +3,7 @@
 
 {% block content %}
     <h1 style="text-align: center">Sign up</h1>
-    <form action="{% url 'accounts:create' %}" method="post" class="text-center account-form">
+    <form action="{% url 'accounts:create' %}?next={{ request.get_full_path }}" method="post" class="text-center account-form">
         {% csrf_token %}
         <div class="mb-3">
             <label for="username" class="form-label">Username:</label>
