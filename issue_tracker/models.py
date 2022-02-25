@@ -49,6 +49,9 @@ class Project(IsDeletedMixin):
     def __str__(self):
         return "{}. {}".format(self.pk, self.title)
 
+    class Meta:
+        permissions = [('change_project_users', 'Can change users of a project')]
+
 
 class Issue(IsDeletedMixin):
     project = models.ForeignKey(
