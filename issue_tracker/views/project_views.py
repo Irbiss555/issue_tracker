@@ -63,18 +63,20 @@ class ProjectIssueCreateView(LoginRequiredMixin, CreateView):
         return context
 
 
-class ProjectEditView(LoginRequiredMixin, UpdateView):
+class ProjectEditView(PermissionRequiredMixin, UpdateView):
     template_name = 'project/project_edit.html'
     model = Project
     form_class = ProjectModelForm
     context_object_name = 'project'
+    permission_required = 'issue_tracker.change_project'
 
     def get_success_url(self):
         return reverse('issue_tracker:project_detail', kwargs={'pk': self.object.pk})
 
 
-class ProjectDeleteView(LoginRequiredMixin, DeleteView):
+class ProjectDeleteView(PermissionRequiredMixin, DeleteView):
     template_name = 'project/project_detail.html'
     model = Project
     success_url = reverse_lazy('issue_tracker:project_list')
     context_object_name = ''
+    permission_required = 'issue_tracker.delete_project'
