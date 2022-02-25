@@ -18,8 +18,10 @@
     <p>Created: {{ issue.created_at }}</p>
     <p>Updated: {{ issue.updated_at }}</p>
     <a href="{% url 'issue_tracker:issue_list' %}" class="btn btn-dark">Issue list</a>
-    {% if request.user.is_authenticated %}
+    {% if perms.issue_tracker.change_issue and request.user in issue.project.users.all %}
         <a href="{% url 'issue_tracker:edit_issue' issue.pk %}" class="btn btn-dark">Edit</a>
+    {% endif %}
+    {% if perms.issue_tracker.delete_issue and request.user in issue.project.users.all %}
         <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">Delete</button>
         {% include 'partial/common/delete_modal.html' %}
     {% endif %}
