@@ -6,7 +6,7 @@
     <h4>{{ project.description|default_if_none:'' }}</h4>
     <p>Start date: {{ project.start_date }}</p>
     <p>End date: {{ project.end_date|default_if_none:'Not set' }}</p>
-    <p>Users:
+    <p class="users-block">Users:
         {% for user in project.users.all %}
             {% if user == project.users.last %}
                 {{ user.get_full_name }}
