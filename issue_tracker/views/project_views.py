@@ -3,7 +3,7 @@ from django.urls import reverse, reverse_lazy
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 
-from issue_tracker.forms import ProjectModelForm, IssueModelForm
+from issue_tracker.forms import ProjectModelForm, IssueModelForm, ProjectUsersModelForm
 from issue_tracker.models import Project, Issue
 
 
@@ -29,6 +29,17 @@ class ProjectCreateView(PermissionRequiredMixin, CreateView):
         self.object = form.save()
         self.object.users.add(self.request.user)
         return redirect(self.get_success_url())
+
+    def get_success_url(self):
+        return reverse('issue_tracker:project_detail', kwargs={'pk': self.object.pk})
+
+
+class ProjectUsersUpdateView(PermissionRequiredMixin, UpdateView):
+    template_name = 'project/project_users_update.html'
+    model = Project
+    form_class = ProjectUsersModelForm
+    context_object_name = 'project'
+    permission_required = 'issue_tracker.change_project_users'
 
     def get_success_url(self):
         return reverse('issue_tracker:project_detail', kwargs={'pk': self.object.pk})
