@@ -6,6 +6,17 @@
                     <h5 class="card-title"><a
                             href="{% url 'issue_tracker:project_detail' project.pk %}"> {{ project.title }}</a>
                     </h5>
+                    <p class="card-text">Users:
+                        {% for user in project.users.all %}
+                            {% if user == project.users.last %}
+                                <a href="{% url 'accounts:user_profile' user.pk %}">{{ user.get_full_name }}</a>
+                            {% else %}
+                                <a href="{% url 'accounts:user_profile' user.pk %}">{{ user.get_full_name }}</a>,
+                            {% endif %}
+                        {% empty %}
+                            No users
+                        {% endfor %}
+                    </p>
                 </div>
             </div>
             <div class="col-md-4">
