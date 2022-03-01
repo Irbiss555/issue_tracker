@@ -7,7 +7,7 @@
     <div class="card mb-3" style="border: none">
         <div class="row g-0">
             <div class="col-md-4">
-                <img src="{{ user_obj.profile.avatar.url }}" class="img-fluid rounded-start" alt="...">
+                <img src="{{ user_obj.profile.avatar.url|default:'/uploads/user_pics/no_image.png' }}" class="img-fluid rounded-start profile-img" alt="profile image">
             </div>
             <div class="col-md-8">
                 <div class="card-body">
