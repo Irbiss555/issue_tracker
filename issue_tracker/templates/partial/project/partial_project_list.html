@@ -19,3 +19,6 @@
 {% empty %}
     <h3>Projects not found</h3>
 {% endfor %}
+{% if is_paginated %}
+    {% include 'partial/common/paginator.html' %}
+{% endif %}
