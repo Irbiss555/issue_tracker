@@ -6,6 +6,11 @@
     "name": "project manager",
     "permissions": [
       [
+        "view_user",
+        "auth",
+        "user"
+      ],
+      [
         "add_issue",
         "issue_tracker",
         "issue"
@@ -60,6 +65,11 @@
     "name": "team lead",
     "permissions": [
       [
+        "view_user",
+        "auth",
+        "user"
+      ],
+      [
         "add_issue",
         "issue_tracker",
         "issue"
@@ -111,7 +121,7 @@
   "pk": 1,
   "fields": {
     "password": "pbkdf2_sha256$260000$hcZnssb5P0BusPhy0k4eO1$kjPJm6hM2xaWCa6Ljb2GTKtzADxOnvjrc8WGzP1j2QQ=",
-    "last_login": "2022-02-25T13:01:49.917Z",
+    "last_login": "2022-03-01T11:18:47.503Z",
     "is_superuser": true,
     "username": "admin",
     "first_name": "admin",
@@ -129,11 +139,11 @@
   "pk": 5,
   "fields": {
     "password": "pbkdf2_sha256$260000$l0IZeOt84h2qdIuWLHh6hV$aNVjbUJdJn5BG/03nwDa2CPOzibKxMvfteuQdRkaJPQ=",
-    "last_login": "2022-02-25T12:10:04.795Z",
+    "last_login": "2022-03-01T11:30:35.063Z",
     "is_superuser": false,
     "username": "manager",
-    "first_name": "manager",
-    "last_name": "",
+    "first_name": "John",
+    "last_name": "Doe",
     "email": "manager@m.com",
     "is_staff": false,
     "is_active": true,
@@ -151,11 +161,11 @@
   "pk": 6,
   "fields": {
     "password": "pbkdf2_sha256$260000$yQvkLA2TVbKDj0JGdaE6WH$BZhyl3MmNwBK7IA3AGShiYJ1ZszPXdDDK7vjX4xZ9kw=",
-    "last_login": "2022-02-25T12:12:03.480Z",
+    "last_login": "2022-03-01T11:31:01.721Z",
     "is_superuser": false,
     "username": "lead",
-    "first_name": "lead",
-    "last_name": "",
+    "first_name": "Ben",
+    "last_name": "Jones",
     "email": "lead@l.com",
     "is_staff": false,
     "is_active": true,
@@ -173,11 +183,11 @@
   "pk": 7,
   "fields": {
     "password": "pbkdf2_sha256$260000$3spUx3WJfSEAN9npXF0LIA$t/HzSMwrYCwoDOn/OneZkYBymV/Ux3Op76dDvcA/aCs=",
-    "last_login": "2022-02-25T12:32:08.326Z",
+    "last_login": "2022-03-01T11:29:00.058Z",
     "is_superuser": false,
     "username": "dev",
-    "first_name": "dev",
-    "last_name": "",
+    "first_name": "Mark",
+    "last_name": "Gates",
     "email": "dev@d.com",
     "is_staff": false,
     "is_active": true,
@@ -187,6 +197,24 @@
         "developer"
       ]
     ],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 8,
+  "fields": {
+    "password": "pbkdf2_sha256$260000$YKaLVYUN7hKTm6rFyHigQn$dPgURdS2Ph1u8cKRG6MTyQM6WdN9MHob4/je3pfgH8k=",
+    "last_login": "2022-03-01T07:32:26Z",
+    "is_superuser": false,
+    "username": "user",
+    "first_name": "James",
+    "last_name": "Bredly",
+    "email": "user@mail.com",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2022-03-01T04:36:05Z",
+    "groups": [],
     "user_permissions": []
   }
 }
