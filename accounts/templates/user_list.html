@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <h1>Users</h1>
+    {% for user_obj in user_list %}
+        <div class="card mb-3">
+            <div class="row g-0">
+                <div class="col-md-8">
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            <a href="{% url 'accounts:user_profile' user_obj.pk %}">{{ user_obj.get_full_name }}</a>
+                        </h5>
+                        <p class="card-text">
+                            Username: {{ user_obj.username }}
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% empty %}
+        <h3>Users not found</h3>
+    {% endfor %}
+    {% if is_paginated %}
+        {% include 'partial/common/paginator.html' %}
+    {% endif %}
+{% endblock %}
