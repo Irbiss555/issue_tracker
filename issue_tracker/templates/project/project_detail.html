@@ -9,9 +9,9 @@
     <p class="users-block">Users:
         {% for user in project.users.all %}
             {% if user == project.users.last %}
-                {{ user.get_full_name }}
+                <a href="{% url 'accounts:user_profile' user.pk %}">{{ user.get_full_name }}</a>
             {% else %}
-                {{ user.get_full_name }},
+                <a href="{% url 'accounts:user_profile' user.pk %}">{{ user.get_full_name }}</a>,
             {% endif %}
         {% empty %}
             No users
