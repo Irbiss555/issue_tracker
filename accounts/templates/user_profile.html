@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <h1>Profile of {{ user_obj.username }}</h1>
+
+    <div class="card mb-3" style="border: none">
+        <div class="row g-0">
+            <div class="col-md-4">
+                <img src="{{ user_obj.profile.avatar.url }}" class="img-fluid rounded-start" alt="...">
+            </div>
+            <div class="col-md-8">
+                <div class="card-body">
+                    <h5 class="card-title">Username: {{ user_obj.username }}</h5>
+                    <p class="card-text">First name: {{ user_obj.first_name }}</p>
+                    <p class="card-text">Last name: {{ user_obj.last_name }}</p>
+                    <p class="card-text">GitHub: <a href="{{ user_obj.profile.github_link }}">{{ user_obj.profile.github_link }}</a></p>
+                    <h5 class="card-text">About info: </h5>
+                    <p class="card-text">{{ user_obj.profile.about_info }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+{#    <img src="" alt="">#}
+{#    <p>First name: {{ user_obj.first_name }}</p>#}
+{#    <p>Last name: {{ user_obj.last_name }}</p>#}
+{#    <p>GitHub: <a href="{{ user_obj.profile.github_link }}">{{ user_obj.profile.github_link }}</a></p>#}
+{#    <p>About info:</p>#}
+{#    <p>{{ user_obj.profile.about_info }}</p>#}
+    <h1>Projects</h1>
+    {% include 'partial/project/partial_project_list.html' %}
+{% endblock %}
