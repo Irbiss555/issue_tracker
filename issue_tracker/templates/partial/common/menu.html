@@ -23,7 +23,7 @@
                 {% endif %}
                 {% if request.user.is_authenticated %}
                     <li class="nav-item nav-link">
-                        Hello, {{ user.username }}!
+                        Hello, <a href="{% url 'accounts:user_profile' user.pk %}">{{ user.username }}</a>!
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" aria-current="page"
