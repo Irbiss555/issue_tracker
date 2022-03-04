@@ -128,6 +128,9 @@ class UserPasswordChangeView(UpdateView):
     form_class = PasswordChangeForm
     context_object_name = 'user_obj'
 
+    def get_object(self, queryset=None):
+        return self.model.objects.get(pk=self.request.user.pk)
+
     def get_success_url(self):
         return reverse('accounts:login')
 
