@@ -1,0 +1,14 @@
+<div class="mb-3">
+    <label for="first_name" class="form-label">First name:</label>
+    <input class="form-control" type="text" name="{{ form.first_name.name }}" id="first_name"
+           value="{{ form.instance.first_name }}">
+</div>
+<div class="mb-3">
+    <label for="last_name" class="form-label">Last name:</label>
+    <input class="form-control" type="text" name="{{ form.last_name.name }}" id="last_name"
+           value="{{ form.instance.last_name }}">
+</div>
+<div class="mb-3">
+    <label for="email" class="form-label">Email:</label>
+    <input class="form-control" type="email" name="{{ form.email.name }}" id="email" value="{{ form.instance.email }}">
+</div>
