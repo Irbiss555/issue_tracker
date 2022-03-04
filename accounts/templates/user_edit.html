@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+    <h1 style="text-align: center">Edit profile</h1>
+    <form action="{% url 'accounts:user_update' %}" method="post" class="text-center account-form" enctype="multipart/form-data">
+        {% csrf_token %}
+        {% include 'partial/user_form.html' %}
+        {% include 'partial/profile_form.html' %}
+        <button type="submit" class="btn btn-dark">Edit</button>
+    </form>
+{% endblock %}
