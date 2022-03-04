@@ -79,7 +79,7 @@ class UserListView(PermissionRequiredMixin, ListView):
     permission_required = 'auth.view_user'
 
 
-class UserUpdateView(UpdateView):
+class UserUpdateView(LoginRequiredMixin, UpdateView):
     template_name = 'user_edit.html'
     model = get_user_model()
     context_object_name = 'user_obj'
@@ -122,7 +122,7 @@ class UserUpdateView(UpdateView):
         return reverse('accounts:user_profile', kwargs={'pk': self.object.pk})
 
 
-class UserPasswordChangeView(UpdateView):
+class UserPasswordChangeView(LoginRequiredMixin, UpdateView):
     template_name = 'user_password_change.html'
     model = get_user_model()
     form_class = PasswordChangeForm
