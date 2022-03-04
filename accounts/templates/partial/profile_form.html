@@ -1,0 +1,17 @@
+<div class="mb-3">
+    <label for="github_link" class="form-label">GitHub:</label>
+    <input class="form-control" type="text" name="{{ profile_form.github_link.name }}" id="github_link"
+           value="{{ profile_form.instance.github_link }}">
+</div>
+<div class="mb-3">
+    <label for="avatar" class="form-label">Image:</label>
+    <br><img src="{{ profile_form.instance.avatar.url }}" alt="avatar" class="profile-img">
+    <p>Chosen: <a href="{{ profile_form.instance.avatar.url }}">{{ profile_form.instance.avatar }}</a></p>
+    <input class="form-control" type="file" name="{{ profile_form.avatar.name }}" id="avatar">
+
+</div>
+<div class="mb-3">
+    <label for="about" class="form-label">About info:</label>
+    <textarea name="{{ profile_form.about_info.name }}" class="form-control" id="about"
+              rows="7">{{ profile_form.instance.about_info }}</textarea>
+</div>
