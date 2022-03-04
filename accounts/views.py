@@ -7,7 +7,7 @@ from django.urls import reverse
 from django.views.generic import CreateView, DetailView, ListView, UpdateView
 from django.contrib.auth.views import LoginView
 
-from accounts.forms import MyUserCreationForm, UserChangeForm, ProfileChangeForm
+from accounts.forms import MyUserCreationForm, UserChangeForm, ProfileChangeForm, PasswordChangeForm
 from django.conf import settings
 
 
@@ -120,3 +120,14 @@ class UserUpdateView(UpdateView):
 
     def get_success_url(self):
         return reverse('accounts:user_profile', kwargs={'pk': self.object.pk})
+
+
+class UserPasswordChangeView(UpdateView):
+    template_name = 'user_password_change.html'
+    model = get_user_model()
+    form_class = PasswordChangeForm
+    context_object_name = 'user_obj'
+
+    def get_success_url(self):
+        return reverse('accounts:login')
+
