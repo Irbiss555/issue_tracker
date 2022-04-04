@@ -9,7 +9,7 @@ class ProjectSerializer(serializers.ModelSerializer):
             'id',
             'users',
             'title',
-            'descriptions',
+            'description',
             'start_date',
             'end_date'
         ]
