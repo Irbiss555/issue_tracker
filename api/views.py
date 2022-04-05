@@ -29,3 +29,10 @@ class ProjectApiView(APIView):
         project = get_object_or_404(Project, pk=pk)
         project.delete()
         return Response({'pk': pk})
+
+
+class IssueApiView(APIView):
+    def get(self, request, *args, **kwargs):
+        object = get_object_or_404(Issue, pk=self.kwargs.get('pk'))
+        serializer = IssueSerializer(object)
+        return Response(serializer.data)
