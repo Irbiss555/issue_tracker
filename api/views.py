@@ -23,3 +23,9 @@ class ProjectApiView(APIView):
             return Response(serializer.data)
         else:
             return Response(serializer.errors, status=400)
+
+    def delete(self, request, *args, **kwargs):
+        pk = self.kwargs['pk']
+        project = get_object_or_404(Project, pk=pk)
+        project.delete()
+        return Response({'pk': pk})
