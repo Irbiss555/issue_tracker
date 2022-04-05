@@ -36,3 +36,14 @@ class IssueApiView(APIView):
         object = get_object_or_404(Issue, pk=self.kwargs.get('pk'))
         serializer = IssueSerializer(object)
         return Response(serializer.data)
+
+    def put(self, request, *args, **kwargs):
+        serializer = IssueSerializer(
+            data=request.data,
+            instance=get_object_or_404(Issue, pk=self.kwargs.get('pk'))
+        )
+        if serializer.is_valid():
+            issue = serializer.save()
+            return Response(serializer.data)
+        else:
+            return Response(serializer.errors, status=400)
