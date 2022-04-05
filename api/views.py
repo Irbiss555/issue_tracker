@@ -47,3 +47,9 @@ class IssueApiView(APIView):
             return Response(serializer.data)
         else:
             return Response(serializer.errors, status=400)
+
+    def delete(self, request, *args, **kwargs):
+        pk = self.kwargs['pk']
+        issue = get_object_or_404(Issue, pk=pk)
+        issue.delete()
+        return Response({'pk': pk})
